@@ -20,3 +20,5 @@ router.post('/api/highscore', async (req, res) => {
     res.status(400).send(error);
   }
 });
+
+export default router;

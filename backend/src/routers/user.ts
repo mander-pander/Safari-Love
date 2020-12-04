@@ -13,3 +13,5 @@ router.post('/api/users', async (req, res) => {
     res.status(400).send(error);
   }
 });
+
+export default router;

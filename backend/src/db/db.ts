@@ -9,6 +9,7 @@ export default function startDB() {
   }
 
   mongoose.connect(MONGODB_URI, { 
+    useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
