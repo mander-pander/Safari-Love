@@ -3,19 +3,6 @@ import User from '../models/User';
 
 const router = express.Router();
 
-router.post('/api/user', async (req, res) => {
-  try {
-    User.init();
-    const user = new User(req.body);
-    await user.save();
-    const token = await user.generateAuthToken();
-    console.log(user, token);
-    res.status(201).send({ user, token });
-  } catch (error) {
-    res.status(400).send({ error: error.message });
-  }
-});
-
 router.post('/api/user/login', async (req, res) => {
   try {
     const { email, password } = req.body;
