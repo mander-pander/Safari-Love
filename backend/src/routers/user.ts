@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post('/api/user/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findByCredentials(email, password);
+    const { username, password } = req.body;
+    const user = await User.findByCredentials(username, password);
 
     if (!user) {
       return res.status(401).send({
@@ -16,7 +16,7 @@ router.post('/api/user/login', async (req, res) => {
 
     const token = await user.generateAuthToken();
 
-    res.status(200).send({ user, token });
+    res.status(200).send({ token });
   } catch (error) {
     res.status(400).send(error)
   }

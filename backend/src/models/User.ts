@@ -65,10 +65,10 @@ class User {
 
   public static async findByCredentials (
     this: ReturnModelType<typeof User>,
-    email: string,
+    username: string,
     password: string
   ) {
-    const user = await this.findOne({ email });
+    const user = await this.findOne({ username });
   
     if (!user) {
       throw new Error('Invalid login credentials');
