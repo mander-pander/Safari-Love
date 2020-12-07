@@ -1,10 +1,12 @@
-import {
+import 
+{
   DocumentType,
   getModelForClass,
   pre,
   prop,
-  ReturnModelType
+  ReturnModelType,
 } from '@typegoose/typegoose';
+import { Schema } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -18,8 +20,7 @@ import jwt from 'jsonwebtoken';
 })
 
 class User {
-  @prop()
-  public _id: string;
+  _id: Schema.Types.ObjectId;
 
   @prop({ required: true, unique: true, trim: true })
   public username: string;
