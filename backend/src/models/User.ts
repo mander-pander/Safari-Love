@@ -11,6 +11,10 @@ import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+export interface IJWTToken {
+  _id: Schema.Types.ObjectId;
+}
+
 @pre<User>('save', async function(next) {
   if (this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 8);
@@ -51,10 +55,14 @@ class User {
     const { JWT_KEY } = process.env;
   
     if (!JWT_KEY) {
-      return null;
+      throw new Error('Invalid JWT Key.');
     }
+
+    const tokenSigner: IJWTToken = {
+      _id: user._id,
+    };
   
-    const token = jwt.sign({ _id: user._id }, JWT_KEY);
+    const token = jwt.sign(tokenSigner, JWT_KEY);
   
     user.token = token;
   
